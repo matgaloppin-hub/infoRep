@@ -2,24 +2,38 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Liste des personnes</title>
+    <title th:text="#{list.title}">Liste des personnes</title>
     <link rel="stylesheet" href="../static/css/style.css"
           th:href="@{/css/style.css}" />
 </head>
 <body>
-<h1>Liste des personnes</h1>
-<a th:href="@{/addPerson}">Ajouter une personne</a>
+<div th:replace="~{fragments/header :: menu}"></div>
+
+<h1 th:text="#{list.title}">Liste des personnes</h1>
+<a th:href="@{/addPerson}" th:text="#{list.add}">Ajouter une personne</a>
 <br/><br/>
-<p th:if="${#lists.isEmpty(persons)}">Aucune personne enregistrée.</p>
+
+<p th:if="${#lists.isEmpty(persons)}" th:text="#{list.empty}">Aucune personne enregistree.</p>
 <table th:unless="${#lists.isEmpty(persons)}">
     <tr>
-        <th>Prénom</th>
-        <th>Nom</th>
+        <th th:text="#{list.firstName}">Prenom</th>
+        <th th:text="#{list.lastName}">Nom</th>
+        <th th:text="#{list.email}">Email</th>
+        <th th:text="#{list.actions}">Actions</th>
     </tr>
     <tr th:each="person : ${persons}">
-        <td th:text="${person.firstName}">Prénom</td>
+        <td th:text="${person.firstName}">Prenom</td>
         <td th:text="${person.lastName}">Nom</td>
+        <td th:text="${person.email}">email</td>
+        <td>
+            <form th:action="@{/deletePerson}" method="post">
+                <input type="hidden" name="id" th:value="${person.id}" />
+                <button type="submit" th:text="#{list.delete}">Supprimer</button>
+            </form>
+        </td>
     </tr>
 </table>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

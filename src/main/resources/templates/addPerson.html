@@ -2,25 +2,34 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Ajouter une personne</title>
+    <title th:text="#{add.title}">Ajouter une personne</title>
     <link rel="stylesheet" href="../static/css/style.css"
           th:href="@{/css/style.css}" />
 </head>
 <body>
-<h1>Créer une personne</h1>
+<div th:replace="~{fragments/header :: menu}"></div>
+
+<h1 th:text="#{add.title}">Creer une personne</h1>
 <form th:action="@{/addPerson}" th:object="${personForm}" method="post">
-    <label for="firstName">Prénom :</label>
+    <label for="firstName" th:text="#{add.firstName}">Prenom :</label>
     <input type="text" th:field="*{firstName}" />
     <span class="error" th:if="${#fields.hasErrors('firstName')}"
           th:errors="*{firstName}">Erreur</span>
     <br/>
-    <label for="lastName">Nom :</label>
+    <label for="lastName" th:text="#{add.lastName}">Nom :</label>
     <input type="text" th:field="*{lastName}" />
     <span class="error" th:if="${#fields.hasErrors('lastName')}"
           th:errors="*{lastName}">Erreur</span>
     <br/>
-    <input type="submit" value="Créer" />
+    <label for="email" th:text="#{add.email}">Email :</label>
+    <input type="text" th:field="*{email}" />
+    <span class="error" th:if="${#fields.hasErrors('email')}"
+          th:errors="*{email}">Erreur</span>
+    <br/>
+    <input type="submit" th:value="#{add.submit}" value="Creer" />
 </form>
-<p><a th:href="@{/personList}">Retour à la liste</a></p>
+<p><a th:href="@{/personList}" th:text="#{add.back}">Retour a la liste</a></p>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
