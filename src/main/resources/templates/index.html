@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Bienvenue</title>
+    <link rel="stylesheet" href="../static/css/style.css"
+          th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>Bienvenue</h1>
+<!--/*@thymesVar id="message" type="java.lang.String"*/-->
+<h2 th:text="${message}">Message d'accueil</h2>
+<a th:href="@{/personList}">Lister les personnes</a>
+</body>
+</html>

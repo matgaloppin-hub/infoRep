@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Liste des personnes</title>
+    <link rel="stylesheet" href="../static/css/style.css"
+          th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>Liste des personnes</h1>
+<a th:href="@{/addPerson}">Ajouter une personne</a>
+<br/><br/>
+<p th:if="${#lists.isEmpty(persons)}">Aucune personne enregistrée.</p>
+<table th:unless="${#lists.isEmpty(persons)}">
+    <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+    </tr>
+    <tr th:each="person : ${persons}">
+        <td th:text="${person.firstName}">Prénom</td>
+        <td th:text="${person.lastName}">Nom</td>
+    </tr>
+</table>
+</body>
+</html>
